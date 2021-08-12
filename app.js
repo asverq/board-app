@@ -8,24 +8,25 @@ for (let i = 0; i < BOARD_CELLS; i++) {
     board.append(square)
     const number = `${[i + 1]}`
     square.append(number)
-    square.addEventListener('mouseover', () => setColor(square))
-    square.addEventListener('mouseleave', () => delColor(square))
+    square.addEventListener('mouseover', setColor)
+    square.addEventListener('mouseleave', delColor)
 }
 
-const setColor = (item) => {
+function setColor(event) {
+    item = event.target
     const color = getColor()
     item.style.background = color
     item.style.color = color
-    item.style.boxShadow = `0 0 5px ${color}, 0 0 10px ${color}`
+    item.style.boxShadow = `0 0 5px ${color}, 0 0 15px ${color}`
 }
 
-const delColor = (item) => {
+function delColor(event) {
+    item = event.target
     item.style.background = "#1d1d1d"
     item.style.boxShadow = 'none'
     item.style.color = 'inherit'
 }
 
-const getColor = () => {
-    const index = Math.floor(Math.random() * colors.length)
-    return colors[index]
+function getColor() {
+    return colors[Math.floor(Math.random() * colors.length)]
 }
